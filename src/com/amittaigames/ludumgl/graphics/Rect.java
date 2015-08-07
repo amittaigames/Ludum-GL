@@ -1,4 +1,4 @@
-package com.amittaigames.ludumgl;
+package com.amittaigames.ludumgl.graphics;
 
 public class Rect {
 

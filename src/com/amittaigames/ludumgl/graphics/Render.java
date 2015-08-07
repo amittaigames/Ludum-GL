@@ -1,6 +1,10 @@
-package com.amittaigames.ludumgl;
+package com.amittaigames.ludumgl.graphics;
 
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
+
+import com.amittaigames.ludumgl.Util;
 
 public class Render {
 
@@ -14,6 +18,38 @@ public class Render {
 	// Sets the color to be used for drawing
 	public void setColor(int r, int g, int b) {
 		GL11.glColor3f(Util.rgbConvert(r), Util.rgbConvert(g), Util.rgbConvert(b));
+	}
+	
+	public void drawTexture(String texture, int x, int y, int w, int h) {
+		Texture t = null;
+		try {
+			t = TextureLoader.getTexture("PNG", this.getClass().getResourceAsStream(texture));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (t == null) {
+			return;
+		}
+		
+		t.bind();
+		
+		GL11.glPushMatrix();
+		
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glTexCoord2f(0, 0);
+			GL11.glVertex2f(x, y);
+			GL11.glTexCoord2f(1, 0);
+			GL11.glVertex2f(x + w, y);
+			GL11.glTexCoord2f(1, 1);
+			GL11.glVertex2f(x + w, y + h);
+			GL11.glTexCoord2f(0, 1);
+			GL11.glVertex2f(x, y + h);
+		}
+		GL11.glEnd();
+		
+		GL11.glPopMatrix();
 	}
 	
 	// Fills a rectangle

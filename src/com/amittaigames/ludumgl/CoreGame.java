@@ -1,5 +1,7 @@
 package com.amittaigames.ludumgl;
 
+import com.amittaigames.ludumgl.graphics.Render;
+
 public abstract class CoreGame {
 
 	public abstract void init();

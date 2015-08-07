@@ -1,8 +1,8 @@
 package test;
 
 import com.amittaigames.ludumgl.CoreGame;
-import com.amittaigames.ludumgl.Render;
 import com.amittaigames.ludumgl.Window;
+import com.amittaigames.ludumgl.graphics.Render;
 
 public class Main extends CoreGame {
 	

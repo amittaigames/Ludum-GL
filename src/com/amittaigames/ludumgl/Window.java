@@ -5,6 +5,8 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
+import com.amittaigames.ludumgl.graphics.Render;
+
 public class Window {
 
 	private static int width;
