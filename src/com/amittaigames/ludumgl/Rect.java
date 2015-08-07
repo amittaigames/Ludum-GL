@@ -16,6 +16,8 @@ public class Rect {
 		this.h = h;
 	}
 	
+	// Rotates rectangle
+	// 'angle' is pretty much the speed of rotation if constantly updated
 	public void rotate(int angle) {
 		this.angle += angle;
 	}

@@ -7,7 +7,7 @@ import com.amittaigames.ludumgl.Window;
 public class Main extends CoreGame {
 	
 	public static void main(String[] args) {
-		Window.init("Ludum GL Test", 800, 600, new Main());
+		Window.init("Ludum GL Test", 800, 600, new Main(), 60);
 	}
 
 	@Override

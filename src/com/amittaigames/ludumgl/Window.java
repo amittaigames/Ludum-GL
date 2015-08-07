@@ -10,9 +10,11 @@ public class Window {
 	private static int width;
 	private static int height;
 	private static CoreGame cg;
+	private static int fps;
 	private static long lastFrame;
 	
-	public static void init(String title, int width, int height, CoreGame cg) {
+	// Sets up the window with a title and size
+	public static void init(String title, int width, int height, CoreGame cg, int fps) {
 		try {
 			Display.setDisplayMode(new DisplayMode(width, height));
 			Display.setTitle(title);
@@ -24,15 +26,19 @@ public class Window {
 		Window.width = width;
 		Window.height = height;
 		Window.cg = cg;
+		Window.fps = fps;
 		start();
 	}
 	
+	// Starts the main loop
 	private static void start() {
 		initGL();
 		getDelta();
 		
+		// Allows user initialization
 		cg.init();
 		
+		// Main game loop
 		while (!Display.isCloseRequested()) {
 			int delta = getDelta();
 			
@@ -40,20 +46,28 @@ public class Window {
 			cg.render(new Render());
 			
 			Display.update();
-			Display.sync(60);
+			Display.sync(fps); // Game frame-rate (Set to 60 for best results)
 		}
 		
+		// Cleans up
 		Display.destroy();
 		System.exit(0);
 	}
 	
 	private static void initGL() {
+		// Allows texturing
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		
+		// Sets up camera
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
 		GL11.glOrtho(0, width, height, 0, -1, 1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 	}
 	
+	// Gets delta time
 	private static int getDelta() {
 		long time = getTime();
 		int delta = (int) (time - lastFrame);
@@ -61,6 +75,7 @@ public class Window {
 		return delta;
 	}
 	
+	// Gets system time
 	private static long getTime() {
 		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
 	}

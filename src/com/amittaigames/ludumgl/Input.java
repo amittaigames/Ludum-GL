@@ -4,6 +4,7 @@ import org.lwjgl.input.Keyboard;
 
 public class Input {
 
+	// Initializes keybaord use
 	public static void init() {
 		try {
 			Keyboard.create();
@@ -12,6 +13,7 @@ public class Input {
 		}
 	}
 	
+	// Returns the use of a key press
 	public static boolean key(int key) {
 		return Keyboard.isKeyDown(key);
 	}
