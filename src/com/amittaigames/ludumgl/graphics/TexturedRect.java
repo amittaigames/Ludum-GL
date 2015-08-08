@@ -1,8 +1,13 @@
 package com.amittaigames.ludumgl.graphics;
 
+import java.io.IOException;
+
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
+
 public class TexturedRect {
 
-	private String texture;
+	private Texture texture;
 	private int x;
 	private int y;
 	private int w;
@@ -11,7 +16,11 @@ public class TexturedRect {
 	private int angle;
 	
 	public TexturedRect(String texture, int x, int y, int w, int h) {
-		this.texture = texture;
+		try {
+			this.texture = TextureLoader.getTexture("PNG", this.getClass().getResourceAsStream(texture));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		this.x = x;
 		this.y = y;
 		this.w = w;
@@ -37,11 +46,11 @@ public class TexturedRect {
 		this.angle = angle;
 	}
 	
-	public String getTexture() {
+	public Texture getTexture() {
 		return texture;
 	}
 	
-	public void setTexture(String texture) {
+	public void setTexture(Texture texture) {
 		this.texture = texture;
 	}
 

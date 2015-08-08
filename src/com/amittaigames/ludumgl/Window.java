@@ -9,18 +9,24 @@ import com.amittaigames.ludumgl.graphics.Render;
 
 public class Window {
 
+	public static boolean USE_VSYNC = true;
+	
 	private static int width;
 	private static int height;
 	private static CoreGame cg;
 	private static int fps;
 	private static long lastFrame;
 	
+	private static long lastFPS;
+	private static int LAST = 0;
+	private static int FPS;
+	
 	// Sets up the window with a title and size
 	public static void init(String title, int width, int height, CoreGame cg, int fps) {
 		try {
 			Display.setDisplayMode(new DisplayMode(width, height));
 			Display.setTitle(title);
-			Display.setVSyncEnabled(true);
+			Display.setVSyncEnabled(USE_VSYNC);
 			Display.create();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,6 +42,7 @@ public class Window {
 	private static void start() {
 		initGL();
 		getDelta();
+		lastFPS = getTime();
 		
 		// Allows user initialization
 		cg.init();
@@ -80,6 +87,26 @@ public class Window {
 	// Gets system time
 	private static long getTime() {
 		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
+	}
+	
+	public static int getCurrentFPS() {
+		int ret = LAST;
+		if (getTime() - lastFPS > 1000) {
+			ret = FPS;
+			LAST = FPS;
+			FPS = 0;
+			lastFPS += 1000;
+		}
+		FPS++;
+		return ret;
+	}
+	
+	public static int getWidth() {
+		return width;
+	}
+	
+	public static int getHeight() {
+		return height;
 	}
 	
 }

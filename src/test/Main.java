@@ -10,8 +10,7 @@ import com.amittaigames.ludumgl.graphics.TexturedRect;
 
 public class Main extends CoreGame {
 	
-	private TexturedRect rect = new TexturedRect("/textures/face.png", 100, 100, 100, 100);
-	private TexturedRect light = new TexturedRect("/textures/light.png", 300, 100, 100, 100);
+	private TexturedRect player;
 	
 	public static void main(String[] args) {
 		Window.init("Ludum GL Test", 800, 600, new Main(), 60);
@@ -20,27 +19,29 @@ public class Main extends CoreGame {
 	@Override
 	public void init() {
 		Input.init();
+		player = new TexturedRect("/textures/Player.png", 100, 100, 100, 100);
 	}
 
 	@Override
 	public void render(Render r) {
 		r.clear(0, 0, 0);
 		
-		r.WHITE_TEXTURE = false;
-		
-		r.setColor(0, 122, 163);
-		r.drawTexture(rect);
+		r.drawTexture(player);
 		
 		r.setColor(255, 255, 255);
-		r.drawTexture(light);
+		r.drawText("FPS: " + Window.getCurrentFPS(), 15, 15);
 	}
 
 	@Override
 	public void update(int delta) {
 		if (Input.key(Keyboard.KEY_D))
-			rect.translate(delta / 5, 0);
+			player.translate(delta / 5, 0);
 		if (Input.key(Keyboard.KEY_A))
-			rect.translate(-(delta / 5), 0);
+			player.translate(-(delta / 5), 0);
+		if (Input.key(Keyboard.KEY_W))
+			player.translate(0, -(delta / 5));
+		if (Input.key(Keyboard.KEY_S))
+			player.translate(0, delta / 5);
 	}
 	
 }

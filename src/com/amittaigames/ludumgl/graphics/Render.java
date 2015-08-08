@@ -1,6 +1,10 @@
 package com.amittaigames.ludumgl.graphics;
 
+import java.awt.Font;
+
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
@@ -9,6 +13,9 @@ import com.amittaigames.ludumgl.Util;
 public class Render {
 
 	public boolean WHITE_TEXTURE = true;
+	
+	private static TrueTypeFont font = new TrueTypeFont(new Font("Arial", Font.PLAIN, 16), true);
+	private Color color;
 	
 	// Clears the screen
 	// Use this before anything else!
@@ -20,21 +27,18 @@ public class Render {
 	// Sets the color to be used for drawing
 	public void setColor(int r, int g, int b) {
 		GL11.glColor3f(Util.rgbConvert(r), Util.rgbConvert(g), Util.rgbConvert(b));
+		color = new Color(r, g, b);
+	}
+	
+	public void drawText(String text, int x, int y) {
+		Color.white.bind();
+		font.drawString(x, y, text, color);
 	}
 	
 	public void drawTexture(TexturedRect r) {
 		GL11.glPushMatrix();
 		
-		Texture t = null;
-		try {
-			t = TextureLoader.getTexture("PNG", this.getClass().getResourceAsStream(r.getTexture()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		if (t == null) {
-			return;
-		}
+		Texture t = r.getTexture();
 		
 		t.bind();
 		
@@ -43,8 +47,6 @@ public class Render {
 		
 		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
 		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
-		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_CLAMP);
-		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_CLAMP);
 		
 		GL11.glTranslatef(r.getX() + (r.getWidth() / 2), r.getY() + (r.getHeight() / 2), 0);
 		GL11.glRotatef(r.getAngle(), 0, 0, 1);
@@ -54,11 +56,11 @@ public class Render {
 		{
 			GL11.glTexCoord2f(0, 0);
 			GL11.glVertex2f(r.getX(), r.getY());
-			GL11.glTexCoord2f(1, 0);
+			GL11.glTexCoord2f(0.75f, 0);
 			GL11.glVertex2f(r.getX() + r.getWidth(), r.getY());
-			GL11.glTexCoord2f(1, 1);
+			GL11.glTexCoord2f(0.75f, 0.75f);
 			GL11.glVertex2f(r.getX() + r.getWidth(), r.getY() + r.getHeight());
-			GL11.glTexCoord2f(0, 1);
+			GL11.glTexCoord2f(0, 0.75f);
 			GL11.glVertex2f(r.getX(), r.getY() + r.getHeight());
 		}
 		GL11.glEnd();
@@ -88,18 +90,16 @@ public class Render {
 		
 		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
 		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
-		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_CLAMP);
-		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_CLAMP);
 		
 		GL11.glBegin(GL11.GL_QUADS);
 		{
 			GL11.glTexCoord2f(0, 0);
 			GL11.glVertex2f(x, y);
-			GL11.glTexCoord2f(1, 0);
+			GL11.glTexCoord2f(0.75f, 0);
 			GL11.glVertex2f(x + w, y);
-			GL11.glTexCoord2f(1, 1);
+			GL11.glTexCoord2f(0.75f, 0.75f);
 			GL11.glVertex2f(x + w, y + h);
-			GL11.glTexCoord2f(0, 1);
+			GL11.glTexCoord2f(0, 0.75f);
 			GL11.glVertex2f(x, y + h);
 		}
 		GL11.glEnd();
