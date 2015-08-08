@@ -22,6 +22,11 @@ public class Triangle {
 		this.angle += angle;
 	}
 	
+	public void translate(int x, int y) {
+		this.x += x;
+		this.y += y;
+	}
+	
 	public int getAngle() {
 		return angle;
 	}

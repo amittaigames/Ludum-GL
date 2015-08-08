@@ -8,6 +8,8 @@ import com.amittaigames.ludumgl.Util;
 
 public class Render {
 
+	public boolean WHITE_TEXTURE = true;
+	
 	// Clears the screen
 	// Use this before anything else!
 	public void clear(int r, int g, int b) {
@@ -36,7 +38,8 @@ public class Render {
 		
 		t.bind();
 		
-		setColor(255, 255, 255);
+		if (WHITE_TEXTURE)
+			setColor(255, 255, 255);
 		
 		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
 		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
@@ -51,11 +54,11 @@ public class Render {
 		{
 			GL11.glTexCoord2f(0, 0);
 			GL11.glVertex2f(r.getX(), r.getY());
-			GL11.glTexCoord2f(0.8f, 0);
+			GL11.glTexCoord2f(1, 0);
 			GL11.glVertex2f(r.getX() + r.getWidth(), r.getY());
-			GL11.glTexCoord2f(0.8f, 0.8f);
+			GL11.glTexCoord2f(1, 1);
 			GL11.glVertex2f(r.getX() + r.getWidth(), r.getY() + r.getHeight());
-			GL11.glTexCoord2f(0, 0.8f);
+			GL11.glTexCoord2f(0, 1);
 			GL11.glVertex2f(r.getX(), r.getY() + r.getHeight());
 		}
 		GL11.glEnd();
@@ -80,7 +83,8 @@ public class Render {
 		
 		t.bind();
 		
-		setColor(255, 255, 255);
+		if (WHITE_TEXTURE)
+			setColor(255, 255, 255);
 		
 		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
 		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
