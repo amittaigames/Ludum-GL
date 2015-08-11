@@ -11,15 +11,15 @@ public class FontHandler {
 	private static List<FontGL> fonts = new ArrayList<FontGL>();
 	
 	public static void setFont(String name) {
-		Render.setFont(getFontByName(name));
+		Render.setFont(getFont(name));
 	}
 	
 	public static void registerFont(Font f, boolean antiAliasing) {
-		System.out.println("[Ludum GL] Loading font: " + f.getName());
-		fonts.add(new FontGL(f.getName(), new TrueTypeFont(f, antiAliasing)));
+		System.out.println("[Ludum GL] Loading font: " + f.getName() + " " + f.getSize());
+		fonts.add(new FontGL(f.getName() + " " + f.getSize(), new TrueTypeFont(f, antiAliasing)));
 	}
 	
-	private static TrueTypeFont getFontByName(String name) {
+	private static TrueTypeFont getFont(String name) {
 		TrueTypeFont ttf = null;
 		for (int i = 0; i < fonts.size(); i++) {
 			FontGL font = fonts.get(i);
@@ -27,6 +27,9 @@ public class FontHandler {
 				ttf = font.getFont();
 				break;
 			}
+		}
+		if (ttf == null) {
+			System.out.println("Could not load font: " + name);
 		}
 		return ttf;
 	}

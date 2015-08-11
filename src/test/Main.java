@@ -33,7 +33,7 @@ public class Main extends CoreGame {
 		r.drawTexture(player);
 		
 		r.setColor(255, 255, 255);
-		FontHandler.setFont("Arial");
+		FontHandler.setFont("Arial 16");
 		r.drawText("FPS: " + Window.getCurrentFPS(), 15, 15);
 	}
 
