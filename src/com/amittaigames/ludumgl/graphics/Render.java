@@ -1,7 +1,5 @@
 package com.amittaigames.ludumgl.graphics;
 
-import java.awt.Font;
-
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
@@ -14,7 +12,7 @@ public class Render {
 
 	public boolean WHITE_TEXTURE = true;
 	
-	private static TrueTypeFont font = new TrueTypeFont(new Font("Arial", Font.PLAIN, 16), true);
+	private static TrueTypeFont font;
 	private Color color;
 	
 	// Clears the screen
@@ -48,9 +46,11 @@ public class Render {
 		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
 		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
 		
-		GL11.glTranslatef(r.getX() + (r.getWidth() / 2), r.getY() + (r.getHeight() / 2), 0);
-		GL11.glRotatef(r.getAngle(), 0, 0, 1);
-		GL11.glTranslatef(-r.getX() - (r.getWidth() / 2), -r.getY() - (r.getHeight() / 2), 0);
+		if (r.getAngle() > 0) {
+			GL11.glTranslatef(r.getX() + (r.getWidth() / 2), r.getY() + (r.getHeight() / 2), 0);
+			GL11.glRotatef(r.getAngle(), 0, 0, 1);
+			GL11.glTranslatef(-r.getX() - (r.getWidth() / 2), -r.getY() - (r.getHeight() / 2), 0);
+		}
 		
 		GL11.glBegin(GL11.GL_QUADS);
 		{
@@ -174,6 +174,10 @@ public class Render {
 		GL11.glEnd();
 		
 		GL11.glPopMatrix();
+	}
+	
+	public static void setFont(TrueTypeFont font) {
+		Render.font = font;
 	}
 	
 }

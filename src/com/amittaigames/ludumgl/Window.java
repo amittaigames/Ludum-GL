@@ -45,6 +45,7 @@ public class Window {
 		lastFPS = getTime();
 		
 		// Allows user initialization
+		System.out.println("[Ludum GL] Running initialization code...");
 		cg.init();
 		
 		// Main game loop
