@@ -9,12 +9,12 @@ public class Natives {
 
 	public static void load() {
 		try {
-			File coyote = new File(SystemData.HOME + "/.ludumgl/");
-			if (!coyote.exists()) {
-				coyote.mkdir();
+			File ludumgl = new File(SystemData.HOME + "/.ludumgl/");
+			if (!ludumgl.exists()) {
+				ludumgl.mkdir();
 				load();
 			}
-			File natives = new File(coyote.getAbsolutePath() + "/natives/");
+			File natives = new File(ludumgl.getAbsolutePath() + "/natives/");
 			if (!natives.exists()) {
 				System.out.println("[Ludum GL] Copying natives...");
 				natives.mkdir();
