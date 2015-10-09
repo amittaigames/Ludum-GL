@@ -9,6 +9,7 @@ public class Rect {
 	
 	private int angle;
 	
+	// Create a rectangle object that can be rendered
 	public Rect(int x, int y, int w, int h) {
 		this.x = x;
 		this.y = y;
@@ -22,6 +23,7 @@ public class Rect {
 		this.angle += angle;
 	}
 	
+	// Translates the rectangle a given x and y value
 	public void translate(int x, int y) {
 		this.x += x;
 		this.y += y;

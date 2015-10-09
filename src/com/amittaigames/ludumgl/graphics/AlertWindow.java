@@ -11,6 +11,7 @@ public class AlertWindow {
 
 	private JFrame frame;
 	
+	// Create an AlertWindow
 	public AlertWindow(String title, String message, boolean closable) {
 		frame = new JFrame(title);
 		frame.setSize(350, 150);
@@ -31,10 +32,12 @@ public class AlertWindow {
 		frame.setContentPane(panel);
 	}
 	
+	// Show that alert window
 	public void show() {
 		frame.setVisible(true);
 	}
 	
+	// Destroy that alert window (necessary if the alert cannot be user closed)
 	public void destroy() {
 		frame.dispose();
 	}

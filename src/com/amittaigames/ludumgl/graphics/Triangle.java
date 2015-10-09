@@ -22,6 +22,7 @@ public class Triangle {
 		this.angle += angle;
 	}
 	
+	// Translates the rectangle a given x and y value
 	public void translate(int x, int y) {
 		this.x += x;
 		this.y += y;

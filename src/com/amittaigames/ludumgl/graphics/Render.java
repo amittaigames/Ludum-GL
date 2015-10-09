@@ -28,11 +28,13 @@ public class Render {
 		color = new Color(r, g, b);
 	}
 	
+	// Draws text using the currently set font
 	public void drawText(String text, int x, int y) {
 		Color.white.bind();
 		font.drawString(x, y, text, color);
 	}
 	
+	// Draws a texture using a TexturedRect object
 	public void drawTexture(TexturedRect r) {
 		GL11.glPushMatrix();
 		
@@ -122,6 +124,7 @@ public class Render {
 		GL11.glPopMatrix();
 	}
 	
+	// Fills a triangle using the Triangle object
 	public void fillTriangle(Triangle t) {
 		GL11.glPushMatrix();
 		
@@ -176,6 +179,7 @@ public class Render {
 		GL11.glPopMatrix();
 	}
 	
+	// Sets a TrueTypeFont (Use FontHandler.setFont() instead of this)
 	public static void setFont(TrueTypeFont font) {
 		Render.font = font;
 	}

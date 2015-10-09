@@ -15,6 +15,7 @@ public class TexturedRect {
 	
 	private int angle;
 	
+	// Create a renderable texture object
 	public TexturedRect(String texture, int x, int y, int w, int h) {
 		try {
 			this.texture = TextureLoader.getTexture("PNG", this.getClass().getResourceAsStream(texture));
@@ -33,6 +34,7 @@ public class TexturedRect {
 		this.angle += angle;
 	}
 	
+	// Translates the rectangle a given x and y value
 	public void translate(int x, int y) {
 		this.x += x;
 		this.y += y;

@@ -7,6 +7,9 @@ import java.io.InputStream;
 
 public class Natives {
 
+	// Don't use this class in your code!
+	// All of this is automatically used by Ludum GL
+	
 	public static void load() {
 		try {
 			File ludumgl = new File(SystemData.HOME + "/.ludumgl/");
