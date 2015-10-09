@@ -1,6 +1,7 @@
 package com.amittaigames.ludumgl.graphics;
 
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,19 @@ public class FontHandler {
 	
 	public static void registerFont(Font f, boolean antiAliasing) {
 		System.out.println("[Ludum GL] Loading font: " + f.getName() + " " + f.getSize());
+		AlertWindow load = new AlertWindow("Loading Font", "Loading font " + f.getName() + " " + f.getSize(), false);
+		load.show();
 		fonts.add(new FontGL(f.getName() + " " + f.getSize(), new TrueTypeFont(f, antiAliasing)));
+		load.destroy();
+	}
+	
+	public static void loadFont(String fontName) {
+		try {
+			Font f = Font.createFont(Font.PLAIN, FontHandler.class.getResourceAsStream(fontName));
+			GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(f);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private static TrueTypeFont getFont(String name) {

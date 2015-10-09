@@ -16,7 +16,7 @@ public class Main extends CoreGame {
 	private TexturedRect player;
 	
 	public static void main(String[] args) {
-		Window.init("Ludum GL Test", 800, 600, new Main(), 30);
+		Window.init("Ludum GL Test", 800, 600, new Main(), 45);
 	}
 
 	@Override
