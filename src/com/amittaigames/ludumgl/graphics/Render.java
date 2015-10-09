@@ -72,7 +72,7 @@ public class Render {
 	}
 	
 	// Draws a texture to the screen
-	public void drawTexture(String texture, int x, int y, int w, int h) {
+	public void drawTexture(String texture, float x, float y, float w, float h) {
 		GL11.glPushMatrix();
 		
 		Texture t = null;
@@ -111,7 +111,7 @@ public class Render {
 	}
 	
 	// Fills a triangle
-	public void fillTriangle(int x, int y, int w, int h) {
+	public void fillTriangle(float x, float y, float w, float h) {
 		GL11.glPushMatrix();
 		
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -149,7 +149,7 @@ public class Render {
 	}
 	
 	// Fills a rectangle
-	public void fillRect(int x, int y, int w, int h) {
+	public void fillRect(float x, float y, float w, float h) {
 		GL11.glPushMatrix();
 		
 		GL11.glDisable(GL11.GL_TEXTURE_2D);

@@ -8,15 +8,15 @@ import org.newdawn.slick.opengl.TextureLoader;
 public class TexturedRect {
 
 	private Texture texture;
-	private int x;
-	private int y;
-	private int w;
-	private int h;
+	private float x;
+	private float y;
+	private float w;
+	private float h;
 	
-	private int angle;
+	private float angle;
 	
 	// Create a renderable texture object
-	public TexturedRect(String texture, int x, int y, int w, int h) {
+	public TexturedRect(String texture, float x, float y, float w, float h) {
 		try {
 			this.texture = TextureLoader.getTexture("PNG", this.getClass().getResourceAsStream(texture));
 		} catch (IOException e) {
@@ -30,21 +30,21 @@ public class TexturedRect {
 	
 	// Rotates rectangle
 	// 'angle' is pretty much the speed of rotation if constantly updated
-	public void rotate(int angle) {
+	public void rotate(float angle) {
 		this.angle += angle;
 	}
 	
 	// Translates the rectangle a given x and y value
-	public void translate(int x, int y) {
+	public void translate(float x, float y) {
 		this.x += x;
 		this.y += y;
 	}
 	
-	public int getAngle() {
+	public float getAngle() {
 		return angle;
 	}
 	
-	public void setAngle(int angle) {
+	public void setAngle(float angle) {
 		this.angle = angle;
 	}
 	
@@ -56,35 +56,35 @@ public class TexturedRect {
 		this.texture = texture;
 	}
 
-	public int getX() {
+	public float getX() {
 		return x;
 	}
 
-	public void setX(int x) {
+	public void setX(float x) {
 		this.x = x;
 	}
 
-	public int getY() {
+	public float getY() {
 		return y;
 	}
 
-	public void setY(int y) {
+	public void setY(float y) {
 		this.y = y;
 	}
 
-	public int getWidth() {
+	public float getWidth() {
 		return w;
 	}
 
-	public void setWidth(int w) {
+	public void setWidth(float w) {
 		this.w = w;
 	}
 
-	public int getHeight() {
+	public float getHeight() {
 		return h;
 	}
 
-	public void setHeight(int h) {
+	public void setHeight(float h) {
 		this.h = h;
 	}
 	

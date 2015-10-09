@@ -2,14 +2,14 @@ package com.amittaigames.ludumgl.graphics;
 
 public class Triangle {
 
-	private int x;
-	private int y;
-	private int w;
-	private int h;
+	private float x;
+	private float y;
+	private float w;
+	private float h;
 	
-	private int angle;
+	private float angle;
 	
-	public Triangle(int x, int y, int w, int h) {
+	public Triangle(float x, float y, float w, float h) {
 		this.x = x;
 		this.y = y;
 		this.w = w;
@@ -18,53 +18,53 @@ public class Triangle {
 	
 	// Rotates rectangle
 	// 'angle' is pretty much the speed of rotation if constantly updated
-	public void rotate(int angle) {
+	public void rotate(float angle) {
 		this.angle += angle;
 	}
 	
 	// Translates the rectangle a given x and y value
-	public void translate(int x, int y) {
+	public void translate(float x, float y) {
 		this.x += x;
 		this.y += y;
 	}
 	
-	public int getAngle() {
+	public float getAngle() {
 		return angle;
 	}
 	
-	public void setAngle(int angle) {
+	public void setAngle(float angle) {
 		this.angle = angle;
 	}
 
-	public int getX() {
+	public float getX() {
 		return x;
 	}
 
-	public void setX(int x) {
+	public void setX(float x) {
 		this.x = x;
 	}
 
-	public int getY() {
+	public float getY() {
 		return y;
 	}
 
-	public void setY(int y) {
+	public void setY(float y) {
 		this.y = y;
 	}
 
-	public int getWidth() {
+	public float getWidth() {
 		return w;
 	}
 
-	public void setWidth(int w) {
+	public void setWidth(float w) {
 		this.w = w;
 	}
 
-	public int getHeight() {
+	public float getHeight() {
 		return h;
 	}
 
-	public void setHeight(int h) {
+	public void setHeight(float h) {
 		this.h = h;
 	}
 	
