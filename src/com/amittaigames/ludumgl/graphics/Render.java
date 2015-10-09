@@ -31,6 +31,7 @@ public class Render {
 	// Draws text using the currently set font
 	public void drawText(String text, int x, int y) {
 		Color.white.bind();
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		font.drawString(x, y, text, color);
 	}
 	
@@ -53,6 +54,8 @@ public class Render {
 			GL11.glRotatef(r.getAngle(), 0, 0, 1);
 			GL11.glTranslatef(-r.getX() - (r.getWidth() / 2), -r.getY() - (r.getHeight() / 2), 0);
 		}
+		
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		
 		GL11.glBegin(GL11.GL_QUADS);
 		{
@@ -93,6 +96,8 @@ public class Render {
 		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
 		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
 		
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		
 		GL11.glBegin(GL11.GL_QUADS);
 		{
 			GL11.glTexCoord2f(0, 0);
@@ -113,6 +118,8 @@ public class Render {
 	public void fillTriangle(int x, int y, int w, int h) {
 		GL11.glPushMatrix();
 		
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		
 		GL11.glBegin(GL11.GL_TRIANGLES);
 		{
 			GL11.glVertex2f(x, y + h);
@@ -132,6 +139,8 @@ public class Render {
 		GL11.glRotatef(t.getAngle(), 0, 0, 1);
 		GL11.glTranslatef(-t.getX() - (t.getWidth() / 2), -t.getY() - (t.getHeight() / 2), 0);
 		
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		
 		GL11.glBegin(GL11.GL_TRIANGLES);
 		{
 			GL11.glVertex2f(t.getX(), t.getY() + t.getHeight());
@@ -146,6 +155,8 @@ public class Render {
 	// Fills a rectangle
 	public void fillRect(int x, int y, int w, int h) {
 		GL11.glPushMatrix();
+		
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		
 		GL11.glBegin(GL11.GL_QUADS);
 		{
@@ -166,6 +177,8 @@ public class Render {
 		GL11.glTranslatef(r.getX() + (r.getWidth() / 2), r.getY() + (r.getHeight() / 2), 0);
 		GL11.glRotatef(r.getAngle(), 0, 0, 1);
 		GL11.glTranslatef(-r.getX() - (r.getWidth() / 2), -r.getY() - (r.getHeight() / 2), 0);
+		
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		
 		GL11.glBegin(GL11.GL_QUADS);
 		{
