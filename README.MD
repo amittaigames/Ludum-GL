@@ -22,7 +22,7 @@ That's because of Slick Util's font loading. In order to display a font with Ope
 
 ## Where can I get the latest library?
 
-Current Version: 0015 [Download](https://app.box.com/s/81nbl10sgen1j870v6tbeige7j9cbub8)
+Current Version: 0016 [Download](https://app.box.com/s/ubo36xq8lmxjqbf91me7lqc3xa16ebqk)
 
 If the library is older than the current code, feel free to build from source.
 Version is the same as commit number ("Commit #xxxx")
