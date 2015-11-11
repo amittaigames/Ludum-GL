@@ -28,6 +28,11 @@ public class Render {
 		color = new Color(r, g, b);
 	}
 	
+	// Sets the color to be used for drawing (using alpha values)
+	public void setColor(int r, int g, int b, int a) {
+		GL11.glColor4f(Util.rgbConvert(r), Util.rgbConvert(g), Util.rgbConvert(b), Util.rgbConvert(a));
+	}
+	
 	// Draws text using the currently set font
 	public void drawText(String text, int x, int y) {
 		Color.white.bind();

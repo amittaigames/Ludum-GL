@@ -38,8 +38,6 @@ public class Main extends CoreGame {
 
 	@Override
 	public void update(int delta) {
-		player.rotate(2.5f);
-		
 		if (Input.key(Keyboard.KEY_D))
 			player.translate(delta / 5, 0);
 		if (Input.key(Keyboard.KEY_A))
@@ -48,6 +46,15 @@ public class Main extends CoreGame {
 			player.translate(0, -(delta / 5));
 		if (Input.key(Keyboard.KEY_S))
 			player.translate(0, delta / 5);
+		
+		if (Input.key(Keyboard.KEY_RIGHT))
+			player.setAngle(90);
+		if (Input.key(Keyboard.KEY_LEFT))
+			player.setAngle(270);
+		if (Input.key(Keyboard.KEY_UP))
+			player.setAngle(0);
+		if (Input.key(Keyboard.KEY_DOWN))
+			player.setAngle(180);
 	}
 	
 }
