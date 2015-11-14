@@ -43,96 +43,96 @@ public class Render {
 	}
 	
 	// Fills 3D cube using a Cube object and DataArray data
-		public void fillCube(Cube c, DataArray da, int dataType) {
-			GL11.glPushMatrix();
-			
-			// Rotate about center
-			GL11.glTranslatef(c.getX() + (c.getWidth() / 2), c.getY() + (c.getHeight() / 2), 
-					c.getZ() + (c.getDepth() / 2));
-			GL11.glRotatef(c.getAngle(), c.getRX(), c.getRY(), c.getRZ());
-			GL11.glTranslatef(-c.getX() - (c.getWidth() / 2), -c.getY() - (c.getHeight() / 2), 
-					-c.getZ() - (c.getDepth() / 2));
-			
-			// Front
-			if (dataType == DataType.COLOR)
-				GL11.glColor3f(da.getData(0, 0), da.getData(0, 1), da.getData(0, 2));
-			GL11.glNormal3f(0, 0, 1);
-			GL11.glBegin(GL11.GL_QUADS);
-			{
-				GL11.glVertex3f(c.getX(), c.getY(), c.getZ());
-				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ());
-				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
-				GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
-			}
-			GL11.glEnd();
-			
-			// Back
-			if (dataType == DataType.COLOR)
-				GL11.glColor3f(da.getData(1, 0), da.getData(1, 1), da.getData(1, 2));
-			GL11.glNormal3f(0, 0, -1);
-			GL11.glBegin(GL11.GL_QUADS);
-			{
-				GL11.glVertex3f(c.getX(), c.getY(), c.getZ() + c.getDepth());
-				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ() + c.getDepth());
-				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
-				GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
-			}
-			GL11.glEnd();
-			
-			// Right
-			if (dataType == DataType.COLOR)
-				GL11.glColor3f(da.getData(2, 0), da.getData(2, 1), da.getData(2, 2));
-			GL11.glNormal3f(-1, 0, 0);
-			GL11.glBegin(GL11.GL_QUADS);
-			{
-				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ());
-				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ() + c.getDepth());
-				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
-				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
-			}
-			GL11.glEnd();
-			
-			// Left
-			if (dataType == DataType.COLOR)
-				GL11.glColor3f(da.getData(3, 0), da.getData(3, 1), da.getData(3, 2));
-			GL11.glNormal3f(1, 0, 0);
-			GL11.glBegin(GL11.GL_QUADS);
-			{
-				GL11.glVertex3f(c.getX(), c.getY(), c.getZ());
-				GL11.glVertex3f(c.getX(), c.getY(), c.getZ() + c.getDepth());
-				GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
-				GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
-			}
-			GL11.glEnd();
-			
-			// Top
-			if (dataType == DataType.COLOR)
-				GL11.glColor3f(da.getData(4, 0), da.getData(4, 1), da.getData(4, 2));
-			GL11.glNormal3f(0, 1, 0);
-			GL11.glBegin(GL11.GL_QUADS);
-			{
-				GL11.glVertex3f(c.getX(), c.getY(), c.getZ());
-				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ());
-				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ() + c.getDepth());
-				GL11.glVertex3f(c.getX(), c.getY(), c.getZ() + c.getDepth());
-			}
-			GL11.glEnd();
-			
-			// Bottom
-			if (dataType == DataType.COLOR)
-				GL11.glColor3f(da.getData(5, 0), da.getData(5, 1), da.getData(5, 2));
-			GL11.glNormal3f(0, -1, 0);
-			GL11.glBegin(GL11.GL_QUADS);
-			{
-				GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
-				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
-				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
-				GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
-			}
-			GL11.glEnd();
-			
-			GL11.glPopMatrix();
+	public void fillCube(Cube c, DataArray da, int dataType) {
+		GL11.glPushMatrix();
+		
+		// Rotate about center
+		GL11.glTranslatef(c.getX() + (c.getWidth() / 2), c.getY() + (c.getHeight() / 2), 
+				c.getZ() + (c.getDepth() / 2));
+		GL11.glRotatef(c.getAngle(), c.getRX(), c.getRY(), c.getRZ());
+		GL11.glTranslatef(-c.getX() - (c.getWidth() / 2), -c.getY() - (c.getHeight() / 2), 
+				-c.getZ() - (c.getDepth() / 2));
+		
+		// Front
+		if (dataType == DataType.COLOR)
+			GL11.glColor3f(da.getData(0, 0), da.getData(0, 1), da.getData(0, 2));
+		GL11.glNormal3f(0, 0, 1);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
 		}
+		GL11.glEnd();
+		
+		// Back
+		if (dataType == DataType.COLOR)
+			GL11.glColor3f(da.getData(1, 0), da.getData(1, 1), da.getData(1, 2));
+		GL11.glNormal3f(0, 0, -1);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+		}
+		GL11.glEnd();
+		
+		// Right
+		if (dataType == DataType.COLOR)
+			GL11.glColor3f(da.getData(2, 0), da.getData(2, 1), da.getData(2, 2));
+		GL11.glNormal3f(-1, 0, 0);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
+		}
+		GL11.glEnd();
+		
+		// Left
+		if (dataType == DataType.COLOR)
+			GL11.glColor3f(da.getData(3, 0), da.getData(3, 1), da.getData(3, 2));
+		GL11.glNormal3f(1, 0, 0);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ());
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
+		}
+		GL11.glEnd();
+		
+		// Top
+		if (dataType == DataType.COLOR)
+			GL11.glColor3f(da.getData(4, 0), da.getData(4, 1), da.getData(4, 2));
+		GL11.glNormal3f(0, 1, 0);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ() + c.getDepth());
+		}
+		GL11.glEnd();
+		
+		// Bottom
+		if (dataType == DataType.COLOR)
+			GL11.glColor3f(da.getData(5, 0), da.getData(5, 1), da.getData(5, 2));
+		GL11.glNormal3f(0, -1, 0);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+		}
+		GL11.glEnd();
+		
+		GL11.glPopMatrix();
+	}
 	
 	// Fills 3D cube using a Cube object (Make sure to enable "3d"!)
 	public void fillCube(Cube c) {
@@ -207,6 +207,126 @@ public class Render {
 			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
 			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
 			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+		}
+		GL11.glEnd();
+		
+		GL11.glPopMatrix();
+	}
+	
+	// Fills 3D cube using a Cube object (Make sure to enable "3d"!)
+	public void fillCubeTexture(Cube c, String texture) {
+		GL11.glPushMatrix();
+		
+		Texture t = null;
+		
+		try {
+			t = TextureLoader.getTexture("PNG", this.getClass().getResourceAsStream(texture));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		t.bind();
+		
+		if (WHITE_TEXTURE)
+			setColor(255, 255, 255);
+		
+		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
+		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
+		
+		// Rotate about center
+		GL11.glTranslatef(c.getX() + (c.getWidth() / 2), c.getY() + (c.getHeight() / 2), 
+				c.getZ() + (c.getDepth() / 2));
+		GL11.glRotatef(c.getAngle(), c.getRX(), c.getRY(), c.getRZ());
+		GL11.glTranslatef(-c.getX() - (c.getWidth() / 2), -c.getY() - (c.getHeight() / 2), 
+				-c.getZ() - (c.getDepth() / 2));
+		
+		// Front
+		GL11.glNormal3f(0, 0, 1);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glTexCoord2f(0, 0);
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ());
+			GL11.glTexCoord2f(1, 0);
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ());
+			GL11.glTexCoord2f(1, 1);
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
+			GL11.glTexCoord2f(0, 1);
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
+		}
+		GL11.glEnd();
+		
+		// Back
+		GL11.glNormal3f(0, 0, -1);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glTexCoord2f(0, 0);
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ() + c.getDepth());
+			GL11.glTexCoord2f(1, 0);
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ() + c.getDepth());
+			GL11.glTexCoord2f(1, 1);
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+			GL11.glTexCoord2f(0, 1);
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+		}
+		GL11.glEnd();
+		
+		// Right
+		GL11.glNormal3f(-1, 0, 0);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glTexCoord2f(0, 0);
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ());
+			GL11.glTexCoord2f(0, 1);
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ() + c.getDepth());
+			GL11.glTexCoord2f(1, 1);
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+			GL11.glTexCoord2f(1, 0);
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
+		}
+		GL11.glEnd();
+		
+		// Left
+		GL11.glNormal3f(1, 0, 0);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glTexCoord2f(0, 0);
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ());
+			GL11.glTexCoord2f(0, 1);
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ() + c.getDepth());
+			GL11.glTexCoord2f(1, 1);
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+			GL11.glTexCoord2f(1, 0);
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
+		}
+		GL11.glEnd();
+		
+		// Top
+		GL11.glNormal3f(0, 1, 0);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glTexCoord2f(0, 0);
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ());
+			GL11.glTexCoord2f(1, 0);
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ());
+			GL11.glTexCoord2f(1, 1);
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ() + c.getDepth());
+			GL11.glTexCoord2f(0, 1);
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ() + c.getDepth());
+		}
+		GL11.glEnd();
+		
+		// Bottom
+		GL11.glNormal3f(0, -1, 0);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glTexCoord2f(0, 0);
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
+			GL11.glTexCoord2f(1, 0);
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
+			GL11.glTexCoord2f(1, 1);
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+			GL11.glTexCoord2f(0, 1);
 			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
 		}
 		GL11.glEnd();
