@@ -21,6 +21,9 @@ public class Window {
 	private static int LAST = 0;
 	private static int FPS;
 	
+	private static int zNear = -1;
+	private static int zFar = 1;
+	
 	// Sets up the window with a title and size
 	public static void init(String title, int width, int height, CoreGame cg, int fps) {
 		try {
@@ -36,6 +39,11 @@ public class Window {
 		Window.cg = cg;
 		Window.fps = fps;
 		start();
+	}
+	
+	public static void config(int zNear, int zFar) {
+		Window.zNear = zNear;
+		Window.zFar = zFar;
 	}
 	
 	// Starts the main loop
@@ -64,6 +72,19 @@ public class Window {
 		System.exit(0);
 	}
 	
+	public static void enable(String... args) {
+		for (String s : args) {
+			if (s.equalsIgnoreCase("3d")) {
+				GL11.glEnable(GL11.GL_DEPTH_TEST);
+			}
+			if (s.equalsIgnoreCase("light")) {
+				GL11.glEnable(GL11.GL_LIGHTING);
+				GL11.glEnable(GL11.GL_LIGHT0);
+				GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+			}
+		}
+	}
+	
 	private static void initGL() {
 		// Allows texturing
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -73,7 +94,7 @@ public class Window {
 		// Sets up camera
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
-		GL11.glOrtho(0, width, height, 0, -1, 1);
+		GL11.glOrtho(0, width, height, 0, zNear, -zFar);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 	}
 	

@@ -40,6 +40,86 @@ public class Render {
 		font.drawString(x, y, text, color);
 	}
 	
+	// Fills 3D cube using a Cube object (Make sure to enable "3d"!)
+	public void fillCube(Cube c) {
+		GL11.glPushMatrix();
+		
+		// Rotate about center
+		GL11.glTranslatef(c.getX() + (c.getWidth() / 2), c.getY() + (c.getHeight() / 2), 
+				c.getZ() + (c.getDepth() / 2));
+		GL11.glRotatef(c.getAngle(), c.getRX(), c.getRY(), c.getRZ());
+		GL11.glTranslatef(-c.getX() - (c.getWidth() / 2), -c.getY() - (c.getHeight() / 2), 
+				-c.getZ() - (c.getDepth() / 2));
+		
+		// Front
+		GL11.glNormal3f(0, 0, 1);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
+		}
+		GL11.glEnd();
+		
+		// Back
+		GL11.glNormal3f(0, 0, -1);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+		}
+		GL11.glEnd();
+		
+		// Right
+		GL11.glNormal3f(-1, 0, 0);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
+		}
+		GL11.glEnd();
+		
+		// Left
+		GL11.glNormal3f(1, 0, 0);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ());
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
+		}
+		GL11.glEnd();
+		
+		// Top
+		GL11.glNormal3f(0, 1, 0);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX(), c.getY(), c.getZ() + c.getDepth());
+		}
+		GL11.glEnd();
+		
+		// Top
+		GL11.glNormal3f(0, -1, 0);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
+			GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+			GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+		}
+		GL11.glEnd();
+		
+		GL11.glPopMatrix();
+	}
+	
 	// Draws a texture using a TexturedRect object
 	public void drawTexture(TexturedRect r) {
 		GL11.glPushMatrix();
