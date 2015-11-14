@@ -7,6 +7,8 @@ import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 
 import com.amittaigames.ludumgl.Util;
+import com.amittaigames.ludumgl.scripts.DataArray;
+import com.amittaigames.ludumgl.scripts.DataType;
 
 public class Render {
 
@@ -39,6 +41,98 @@ public class Render {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		font.drawString(x, y, text, color);
 	}
+	
+	// Fills 3D cube using a Cube object and DataArray data
+		public void fillCube(Cube c, DataArray da, int dataType) {
+			GL11.glPushMatrix();
+			
+			// Rotate about center
+			GL11.glTranslatef(c.getX() + (c.getWidth() / 2), c.getY() + (c.getHeight() / 2), 
+					c.getZ() + (c.getDepth() / 2));
+			GL11.glRotatef(c.getAngle(), c.getRX(), c.getRY(), c.getRZ());
+			GL11.glTranslatef(-c.getX() - (c.getWidth() / 2), -c.getY() - (c.getHeight() / 2), 
+					-c.getZ() - (c.getDepth() / 2));
+			
+			// Front
+			if (dataType == DataType.COLOR)
+				GL11.glColor3f(da.getData(0, 0), da.getData(0, 1), da.getData(0, 2));
+			GL11.glNormal3f(0, 0, 1);
+			GL11.glBegin(GL11.GL_QUADS);
+			{
+				GL11.glVertex3f(c.getX(), c.getY(), c.getZ());
+				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ());
+				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
+				GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
+			}
+			GL11.glEnd();
+			
+			// Back
+			if (dataType == DataType.COLOR)
+				GL11.glColor3f(da.getData(1, 0), da.getData(1, 1), da.getData(1, 2));
+			GL11.glNormal3f(0, 0, -1);
+			GL11.glBegin(GL11.GL_QUADS);
+			{
+				GL11.glVertex3f(c.getX(), c.getY(), c.getZ() + c.getDepth());
+				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ() + c.getDepth());
+				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+				GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+			}
+			GL11.glEnd();
+			
+			// Right
+			if (dataType == DataType.COLOR)
+				GL11.glColor3f(da.getData(2, 0), da.getData(2, 1), da.getData(2, 2));
+			GL11.glNormal3f(-1, 0, 0);
+			GL11.glBegin(GL11.GL_QUADS);
+			{
+				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ());
+				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ() + c.getDepth());
+				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
+			}
+			GL11.glEnd();
+			
+			// Left
+			if (dataType == DataType.COLOR)
+				GL11.glColor3f(da.getData(3, 0), da.getData(3, 1), da.getData(3, 2));
+			GL11.glNormal3f(1, 0, 0);
+			GL11.glBegin(GL11.GL_QUADS);
+			{
+				GL11.glVertex3f(c.getX(), c.getY(), c.getZ());
+				GL11.glVertex3f(c.getX(), c.getY(), c.getZ() + c.getDepth());
+				GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+				GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
+			}
+			GL11.glEnd();
+			
+			// Top
+			if (dataType == DataType.COLOR)
+				GL11.glColor3f(da.getData(4, 0), da.getData(4, 1), da.getData(4, 2));
+			GL11.glNormal3f(0, 1, 0);
+			GL11.glBegin(GL11.GL_QUADS);
+			{
+				GL11.glVertex3f(c.getX(), c.getY(), c.getZ());
+				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ());
+				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY(), c.getZ() + c.getDepth());
+				GL11.glVertex3f(c.getX(), c.getY(), c.getZ() + c.getDepth());
+			}
+			GL11.glEnd();
+			
+			// Bottom
+			if (dataType == DataType.COLOR)
+				GL11.glColor3f(da.getData(5, 0), da.getData(5, 1), da.getData(5, 2));
+			GL11.glNormal3f(0, -1, 0);
+			GL11.glBegin(GL11.GL_QUADS);
+			{
+				GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ());
+				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ());
+				GL11.glVertex3f(c.getX() + c.getWidth(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+				GL11.glVertex3f(c.getX(), c.getY() + c.getHeight(), c.getZ() + c.getDepth());
+			}
+			GL11.glEnd();
+			
+			GL11.glPopMatrix();
+		}
 	
 	// Fills 3D cube using a Cube object (Make sure to enable "3d"!)
 	public void fillCube(Cube c) {
@@ -106,7 +200,7 @@ public class Render {
 		}
 		GL11.glEnd();
 		
-		// Top
+		// Bottom
 		GL11.glNormal3f(0, -1, 0);
 		GL11.glBegin(GL11.GL_QUADS);
 		{

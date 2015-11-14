@@ -4,10 +4,14 @@ import com.amittaigames.ludumgl.CoreGame;
 import com.amittaigames.ludumgl.Window;
 import com.amittaigames.ludumgl.graphics.Cube;
 import com.amittaigames.ludumgl.graphics.Render;
+import com.amittaigames.ludumgl.scripts.DataArray;
+import com.amittaigames.ludumgl.scripts.DataType;
+import com.amittaigames.ludumgl.scripts.ScriptHandler;
 
 public class Main extends CoreGame {
 	
 	private static Cube c;
+	private static DataArray da;
 	
 	public static void main(String[] args) {
 		Window.config(200, 800);
@@ -18,6 +22,7 @@ public class Main extends CoreGame {
 	public void init() {
 		Window.enable("3d", "light");
 		c = new Cube(200, 200, 1, 200, 200, 200);
+		da = ScriptHandler.compileScript("/scripts/rainbow_cube.ludumgl", DataType.COLOR);
 	}
 
 	@Override
@@ -25,7 +30,7 @@ public class Main extends CoreGame {
 		r.clear(0, 0, 0);
 		
 		r.setColor(0, 122, 163);
-		r.fillCube(c);
+		r.fillCube(c, da, DataType.COLOR);
 	}
 
 	@Override
