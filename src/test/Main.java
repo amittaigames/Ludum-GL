@@ -4,12 +4,16 @@ import org.lwjgl.input.Keyboard;
 
 import com.amittaigames.ludumgl.CoreGame;
 import com.amittaigames.ludumgl.Window;
-import com.amittaigames.ludumgl.graphics.Cube;
+import com.amittaigames.ludumgl.graphics.Pyramid;
 import com.amittaigames.ludumgl.graphics.Render;
+import com.amittaigames.ludumgl.scripts.DataArray;
+import com.amittaigames.ludumgl.scripts.DataType;
+import com.amittaigames.ludumgl.scripts.ScriptHandler;
 
 public class Main extends CoreGame {
 	
-	private static Cube c;
+	private static Pyramid p;
+	private static DataArray pColor;
 	
 	private float speed = 2.5f;
 	
@@ -21,29 +25,29 @@ public class Main extends CoreGame {
 	@Override
 	public void init() {
 		Window.enable("3d", "light");
-		c = new Cube(200, 200, 1, 200, 200, 200);
+		p = new Pyramid(150, 150, 1, 200, 200, 200);
+		pColor = ScriptHandler.compileScript("/scripts/color_tri.ludumgl", DataType.COLOR);
 	}
 
 	@Override
 	public void render(Render r) {
 		r.clear(0, 0, 0);
 		
-		r.setColor(0, 122, 163);
-		r.fillCubeTexture(c, "/textures/dirt.png");
+		r.fillPyramid(p, pColor, DataType.COLOR);
 	}
 
 	@Override
 	public void update(int delta) {
-		c.rotate(1.25f, 1, 1, 1);
+		p.rotate(1.25f, 1, 1, 0);
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_D))
-			c.translate(speed, 0, 0);
+			p.translate(speed, 0, 0);
 		if (Keyboard.isKeyDown(Keyboard.KEY_A))
-			c.translate(-speed, 0, 0);
+			p.translate(-speed, 0, 0);
 		if (Keyboard.isKeyDown(Keyboard.KEY_W))
-			c.translate(0, -speed, 0);
+			p.translate(0, -speed, 0);
 		if (Keyboard.isKeyDown(Keyboard.KEY_S))
-			c.translate(0, speed, 0);
+			p.translate(0, speed, 0);
 	}
 	
 }

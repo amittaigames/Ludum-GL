@@ -48,8 +48,8 @@ public class ScriptHandler {
 				.replace("#back", "1")
 				.replace("#right", "2")
 				.replace("#left", "3")
-				.replace("#top", "4")
-				.replace("#bottom", "5");
+				.replace("#bottom", "4")
+				.replace("#top", "5");
 	}
 	
 }

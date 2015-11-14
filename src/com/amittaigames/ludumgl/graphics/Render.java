@@ -42,6 +42,144 @@ public class Render {
 		font.drawString(x, y, text, color);
 	}
 	
+	// Fill 3D pyramid using a Pyramid object
+	public void fillPyramid(Pyramid p, DataArray da, int dataType) {
+		GL11.glPushMatrix();
+		
+		GL11.glTranslatef(p.getX() + (p.getWidth() / 2), p.getY() + (p.getHeight() / 2), 
+				p.getZ() + (p.getDepth() / 2));
+		GL11.glRotatef(p.getAngle(), p.getRX(), p.getRY(), p.getRZ());
+		GL11.glTranslatef(-p.getX() - (p.getWidth() / 2), -p.getY() - (p.getHeight() / 2), 
+				-p.getZ() - (p.getDepth() / 2));
+		
+		// Front
+		if (dataType == DataType.COLOR)
+			GL11.glColor3f(da.getData(0, 0), da.getData(0, 1), da.getData(0, 2));
+		GL11.glNormal3f(0, 0, 1);
+		GL11.glBegin(GL11.GL_TRIANGLES);
+		{
+			GL11.glVertex3f(p.getX() + (p.getWidth() / 2), p.getY(), p.getZ() + (p.getDepth() / 2));
+			GL11.glVertex3f(p.getX() + p.getWidth(), p.getY() + p.getHeight(), p.getZ());
+			GL11.glVertex3f(p.getX(), p.getY() + p.getHeight(), p.getZ());
+		}
+		GL11.glEnd();
+		
+		// Back
+		if (dataType == DataType.COLOR)
+			GL11.glColor3f(da.getData(1, 0), da.getData(1, 1), da.getData(1, 2));
+		GL11.glNormal3f(0, 0, -1);
+		GL11.glBegin(GL11.GL_TRIANGLES);
+		{
+			GL11.glVertex3f(p.getX() + (p.getWidth() / 2), p.getY(), p.getZ() + (p.getDepth() / 2));
+			GL11.glVertex3f(p.getX() + p.getWidth(), p.getY() + p.getHeight(), p.getZ() + p.getDepth());
+			GL11.glVertex3f(p.getX(), p.getY() + p.getHeight(), p.getZ() + p.getDepth());
+		}
+		GL11.glEnd();
+		
+		// Right
+		if (dataType == DataType.COLOR)
+			GL11.glColor3f(da.getData(2, 0), da.getData(2, 1), da.getData(2, 2));
+		GL11.glNormal3f(-1, 0, 0);
+		GL11.glBegin(GL11.GL_TRIANGLES);
+		{
+			GL11.glVertex3f(p.getX() + (p.getWidth() / 2), p.getY(), p.getZ() + (p.getDepth() / 2));
+			GL11.glVertex3f(p.getX() + p.getWidth(), p.getY() + p.getHeight(), p.getZ() + p.getDepth());
+			GL11.glVertex3f(p.getX() + p.getWidth(), p.getY() + p.getHeight(), p.getZ());
+		}
+		GL11.glEnd();
+		
+		// Left
+		if (dataType == DataType.COLOR)
+			GL11.glColor3f(da.getData(3, 0), da.getData(3, 1), da.getData(3, 2));
+		GL11.glNormal3f(1, 0, 0);
+		GL11.glBegin(GL11.GL_TRIANGLES);
+		{
+			GL11.glVertex3f(p.getX() + (p.getWidth() / 2), p.getY(), p.getZ() + (p.getDepth() / 2));
+			GL11.glVertex3f(p.getX(), p.getY() + p.getHeight(), p.getZ() + p.getDepth());
+			GL11.glVertex3f(p.getX(), p.getY() + p.getHeight(), p.getZ());
+		}
+		GL11.glEnd();
+		
+		// Bottom
+		if (dataType == DataType.COLOR)
+			GL11.glColor3f(da.getData(4, 0), da.getData(4, 1), da.getData(4, 2));
+		GL11.glNormal3f(0, -1, 0);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glVertex3f(p.getX(), p.getY() + p.getHeight(), p.getZ());
+			GL11.glVertex3f(p.getX() + p.getWidth(), p.getY() + p.getHeight(), p.getZ());
+			GL11.glVertex3f(p.getX() + p.getWidth(), p.getY() + p.getHeight(), p.getZ() + p.getDepth());
+			GL11.glVertex3f(p.getX(), p.getY() + p.getHeight(), p.getZ() + p.getDepth());
+		}
+		GL11.glEnd();
+		
+		GL11.glPopMatrix();
+	}
+	
+	// Fill 3D pyramid using a Pyramid object
+	public void fillPyramid(Pyramid p) {
+		GL11.glPushMatrix();
+		
+		GL11.glTranslatef(p.getX() + (p.getWidth() / 2), p.getY() + (p.getHeight() / 2), 
+				p.getZ() + (p.getDepth() / 2));
+		GL11.glRotatef(p.getAngle(), p.getRX(), p.getRY(), p.getRZ());
+		GL11.glTranslatef(-p.getX() - (p.getWidth() / 2), -p.getY() - (p.getHeight() / 2), 
+				-p.getZ() - (p.getDepth() / 2));
+		
+		// Front
+		GL11.glNormal3f(0, 0, 1);
+		GL11.glBegin(GL11.GL_TRIANGLES);
+		{
+			GL11.glVertex3f(p.getX() + (p.getWidth() / 2), p.getY(), p.getZ() + (p.getDepth() / 2));
+			GL11.glVertex3f(p.getX() + p.getWidth(), p.getY() + p.getHeight(), p.getZ());
+			GL11.glVertex3f(p.getX(), p.getY() + p.getHeight(), p.getZ());
+		}
+		GL11.glEnd();
+		
+		// Back
+		GL11.glNormal3f(0, 0, -1);
+		GL11.glBegin(GL11.GL_TRIANGLES);
+		{
+			GL11.glVertex3f(p.getX() + (p.getWidth() / 2), p.getY(), p.getZ() + (p.getDepth() / 2));
+			GL11.glVertex3f(p.getX() + p.getWidth(), p.getY() + p.getHeight(), p.getZ() + p.getDepth());
+			GL11.glVertex3f(p.getX(), p.getY() + p.getHeight(), p.getZ() + p.getDepth());
+		}
+		GL11.glEnd();
+		
+		// Right
+		GL11.glNormal3f(-1, 0, 0);
+		GL11.glBegin(GL11.GL_TRIANGLES);
+		{
+			GL11.glVertex3f(p.getX() + (p.getWidth() / 2), p.getY(), p.getZ() + (p.getDepth() / 2));
+			GL11.glVertex3f(p.getX() + p.getWidth(), p.getY() + p.getHeight(), p.getZ() + p.getDepth());
+			GL11.glVertex3f(p.getX() + p.getWidth(), p.getY() + p.getHeight(), p.getZ());
+		}
+		GL11.glEnd();
+		
+		// Left
+		GL11.glNormal3f(1, 0, 0);
+		GL11.glBegin(GL11.GL_TRIANGLES);
+		{
+			GL11.glVertex3f(p.getX() + (p.getWidth() / 2), p.getY(), p.getZ() + (p.getDepth() / 2));
+			GL11.glVertex3f(p.getX(), p.getY() + p.getHeight(), p.getZ() + p.getDepth());
+			GL11.glVertex3f(p.getX(), p.getY() + p.getHeight(), p.getZ());
+		}
+		GL11.glEnd();
+		
+		// Bottom
+		GL11.glNormal3f(0, -1, 0);
+		GL11.glBegin(GL11.GL_QUADS);
+		{
+			GL11.glVertex3f(p.getX(), p.getY() + p.getHeight(), p.getZ());
+			GL11.glVertex3f(p.getX() + p.getWidth(), p.getY() + p.getHeight(), p.getZ());
+			GL11.glVertex3f(p.getX() + p.getWidth(), p.getY() + p.getHeight(), p.getZ() + p.getDepth());
+			GL11.glVertex3f(p.getX(), p.getY() + p.getHeight(), p.getZ() + p.getDepth());
+		}
+		GL11.glEnd();
+		
+		GL11.glPopMatrix();
+	}
+	
 	// Fills 3D cube using a Cube object and DataArray data
 	public void fillCube(Cube c, DataArray da, int dataType) {
 		GL11.glPushMatrix();
@@ -107,7 +245,7 @@ public class Render {
 		
 		// Top
 		if (dataType == DataType.COLOR)
-			GL11.glColor3f(da.getData(4, 0), da.getData(4, 1), da.getData(4, 2));
+			GL11.glColor3f(da.getData(5, 0), da.getData(5, 1), da.getData(5, 2));
 		GL11.glNormal3f(0, 1, 0);
 		GL11.glBegin(GL11.GL_QUADS);
 		{
@@ -120,7 +258,7 @@ public class Render {
 		
 		// Bottom
 		if (dataType == DataType.COLOR)
-			GL11.glColor3f(da.getData(5, 0), da.getData(5, 1), da.getData(5, 2));
+			GL11.glColor3f(da.getData(4, 0), da.getData(4, 1), da.getData(4, 2));
 		GL11.glNormal3f(0, -1, 0);
 		GL11.glBegin(GL11.GL_QUADS);
 		{
