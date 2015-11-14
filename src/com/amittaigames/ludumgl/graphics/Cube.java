@@ -23,6 +23,12 @@ public class Cube {
 		this.depth = depth;
 	}
 	
+	public void translate(float x, float y, float z) {
+		this.x += x;
+		this.y += y;
+		this.z += z;
+	}
+	
 	public void rotate(float angle, float rx, float ry, float rz) {
 		this.angle += angle;
 		this.rx = rx;
