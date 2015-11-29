@@ -1,19 +1,18 @@
 package test;
 
+import java.awt.Font;
+
 import org.lwjgl.input.Keyboard;
 
 import com.amittaigames.ludumgl.CoreGame;
 import com.amittaigames.ludumgl.Window;
-import com.amittaigames.ludumgl.graphics.Pyramid;
+import com.amittaigames.ludumgl.graphics.Cube;
+import com.amittaigames.ludumgl.graphics.FontHandler;
 import com.amittaigames.ludumgl.graphics.Render;
-import com.amittaigames.ludumgl.scripts.DataArray;
-import com.amittaigames.ludumgl.scripts.DataType;
-import com.amittaigames.ludumgl.scripts.ScriptHandler;
 
 public class Main extends CoreGame {
 	
-	private static Pyramid p;
-	private static DataArray pColor;
+	private static Cube cube;
 	
 	private float speed = 2.5f;
 	
@@ -25,29 +24,34 @@ public class Main extends CoreGame {
 	@Override
 	public void init() {
 		Window.enable("3d", "light");
-		p = new Pyramid(150, 150, 1, 200, 200, 200);
-		pColor = ScriptHandler.compileScript("/scripts/color_tri.ludumgl", DataType.COLOR);
+		cube = new Cube(150, 150, 1, 200, 200, 200);
+		FontHandler.registerFont(new Font("Arial", Font.PLAIN, 16), true);
 	}
 
 	@Override
 	public void render(Render r) {
 		r.clear(0, 0, 0);
 		
-		r.fillPyramid(p, pColor, DataType.COLOR);
+		r.setColor(128, 128, 128);
+		r.fillCube(cube);
+		
+		r.setColor(255, 255, 255);
+		FontHandler.setFont("Arial 16");
+		r.drawText("FPS: " + Window.getCurrentFPS(), 15, 15);
 	}
 
 	@Override
 	public void update(int delta) {
-		p.rotate(1.25f, 1, 1, 0);
+		cube.rotate(1.25f, 1, 1, 1);
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_D))
-			p.translate(speed, 0, 0);
+			cube.translate(speed, 0, 0);
 		if (Keyboard.isKeyDown(Keyboard.KEY_A))
-			p.translate(-speed, 0, 0);
+			cube.translate(-speed, 0, 0);
 		if (Keyboard.isKeyDown(Keyboard.KEY_W))
-			p.translate(0, -speed, 0);
+			cube.translate(0, -speed, 0);
 		if (Keyboard.isKeyDown(Keyboard.KEY_S))
-			p.translate(0, speed, 0);
+			cube.translate(0, speed, 0);
 	}
 	
 }

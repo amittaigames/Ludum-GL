@@ -21,7 +21,7 @@ public class Window {
 	private static int LAST = 0;
 	private static int FPS;
 	
-	private static int zNear = -1;
+	private static int zNear = 1;
 	private static int zFar = 1;
 	
 	// Sets up the window with a title and size
@@ -121,6 +121,10 @@ public class Window {
 		}
 		FPS++;
 		return ret;
+	}
+	
+	public static void setTitle(String title) {
+		Display.setTitle(title);
 	}
 	
 	public static int getWidth() {

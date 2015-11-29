@@ -603,6 +603,25 @@ public class Render {
 		GL11.glPopMatrix();
 	}
 	
+	public void drawRect(Rect r) {
+		GL11.glPushMatrix();
+		
+		GL11.glTranslatef(r.getX() + (r.getWidth() / 2), r.getY() + (r.getHeight() / 2), 0);
+		GL11.glRotatef(r.getAngle(), 0, 0, 1);
+		GL11.glTranslatef(-r.getX() - (r.getWidth() / 2), -r.getY() - (r.getHeight() / 2), 0);
+		
+		GL11.glBegin(GL11.GL_LINE_LOOP);
+		{
+			GL11.glVertex2f(r.getX(), r.getY());
+			GL11.glVertex2f(r.getX() + r.getWidth(), r.getY());
+			GL11.glVertex2f(r.getX() + r.getWidth(), r.getY() + r.getHeight());
+			GL11.glVertex2f(r.getX(), r.getY() + r.getHeight());
+		}
+		GL11.glEnd();
+		
+		GL11.glPopMatrix();
+	}
+	
 	// Fills a rectangle using the 'Rect' object
 	public void fillRect(Rect r) {
 		GL11.glPushMatrix();
