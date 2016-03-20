@@ -35,10 +35,16 @@ public class Natives {
 			loadNative("liblwjgl.dylib");
 		}
 		if (SystemData.OS.contains("Windows")) {
-			loadNative("lwjgl.dll");
+			if (SystemData.ARCH.equals("x86"))
+				loadNative("lwjgl.dll");
+			else
+				loadNative("lwjgl64.dll");
 		}
 		if (SystemData.OS.contains("Linux")) {
-			loadNative("liblwjgl.so");
+			if (SystemData.ARCH.equals("x86"))
+				loadNative("liblwjgl.so");
+			else
+				loadNative("liblwjgl64.so");
 		}
 	}
 	

@@ -474,6 +474,7 @@ public class Render {
 	
 	// Draws a texture using a TexturedRect object
 	public void drawTexture(TexturedRect r) {
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glPushMatrix();
 		
 		Texture t = r.getTexture();
@@ -496,11 +497,11 @@ public class Render {
 		{
 			GL11.glTexCoord2f(0, 0);
 			GL11.glVertex2f(r.getX(), r.getY());
-			GL11.glTexCoord2f(0.75f, 0);
+			GL11.glTexCoord2f(1, 0);
 			GL11.glVertex2f(r.getX() + r.getWidth(), r.getY());
-			GL11.glTexCoord2f(0.75f, 0.75f);
+			GL11.glTexCoord2f(1, 1);
 			GL11.glVertex2f(r.getX() + r.getWidth(), r.getY() + r.getHeight());
-			GL11.glTexCoord2f(0, 0.75f);
+			GL11.glTexCoord2f(0, 1);
 			GL11.glVertex2f(r.getX(), r.getY() + r.getHeight());
 		}
 		GL11.glEnd();

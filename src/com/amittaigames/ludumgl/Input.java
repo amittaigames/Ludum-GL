@@ -4,7 +4,7 @@ import org.lwjgl.input.Keyboard;
 
 public class Input {
 
-	// Initializes keybaord use
+	// Initializes keyboard use
 	public static void init() {
 		try {
 			Keyboard.create();

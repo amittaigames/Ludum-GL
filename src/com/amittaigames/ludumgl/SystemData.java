@@ -8,4 +8,7 @@ public class SystemData {
 	// Gets the user's home directory
 	public static final String HOME = System.getProperty("user.home");
 	
+	// Gets JRE architecture
+	public static final String ARCH = System.getProperty("os.arch");
+	
 }
